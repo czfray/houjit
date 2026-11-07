@@ -1,0 +1,32 @@
+:root {
+    --cyan: rgb(26, 188, 156);
+    --green: rgb(46, 204, 113);
+    --blue: rgb(52, 152, 219);
+    --purple: rgb(155, 89, 182);
+    --light-black: rgb(52, 73, 94);
+    --dark-cyan: rgb(22, 160, 133);
+    --dark-green: rgb(39, 174, 96);
+    --dark-blue: rgb(41, 128, 185);
+    --dark-purple: rgb(142, 68, 173);
+    --black: rgb(44, 62, 80);
+    --yellow: rgb(241, 196, 15);
+    --orange: rgb(230, 126, 34);
+    --red: rgb(231, 76, 60);
+    --white: rgb(236, 240, 241);
+    --gray: rgb(149, 165, 166);
+    --dark-yellow: rgb(243, 156, 18);
+    --dark-orange: rgb(211, 84, 0);
+    --dark-red: rgb(192, 57, 43);
+    --dark-white: rgb(189, 195, 199);
+    --dark-gray: rgb(127, 140, 141);
+}
+
+* {
+    font-family: "Google Sans Flex", "Noto Sans HK", sans-serif;
+    color: var(--white);
+    text-align: center;
+}
+
+body {
+    background-color: var(--black)
+}

@@ -1,0 +1,890 @@
+{
+    "stations": {
+        "1": {
+            "name": {
+                "tc": "中環碼頭",
+                "sc": "中环码头",
+                "en": "Central Pier"
+            },
+            "address": {
+                "tc": "中環民輝街32號中區政府碼頭",
+                "sc": "中环民辉街32号中区政府码头",
+                "en": "Central Government Pier, 32 Man Fai Street, Central"
+            },
+            "coordinates": [
+                22.28888889,
+                114.15583333
+            ],
+            "elevation": 19
+        },
+        "2": {
+            "name": {
+                "tc": "長洲",
+                "sc": "长洲",
+                "en": "Cheung Chau"
+            },
+            "address": {
+                "tc": "長洲山頂路西長洲氣象站",
+                "sc": "长洲山顶路西长洲气象站",
+                "en": "Cheung Chau Meteorological Station, Peak Road West, Cheung Chau"
+            },
+            "coordinates": [
+                22.20111111,
+                114.02666667
+            ],
+            "elevation": 72
+        },
+        "3": {
+            "name": {
+                "tc": "清水灣",
+                "sc": "清水湾",
+                "en": "Clear Water Bay"
+            },
+            "address": {
+                "tc": "清水灣大坳門路139號清水灣鄉村俱樂部",
+                "sc": "清水湾大坳门路139号清水湾乡村俱乐部",
+                "en": "The Clearwater Bay Golf and Country Club, 139 Tai Au Mun Road, Clearwater Bay"
+            },
+            "coordinates": [
+                22.26333333,
+                114.29972222
+            ],
+            "elevation": 66
+        },
+        "4": {
+            "name": {
+                "tc": "跑馬地",
+                "sc": "跑马地",
+                "en": "Happy Valley"
+            },
+            "address": {
+                "tc": "香港跑馬地",
+                "sc": "香港跑马地",
+                "en": "Happy Valley, Hong Kong"
+            },
+            "coordinates": [
+                22.27055556,
+                114.18361111
+            ],
+            "elevation": 5
+        },
+        "5": {
+            "name": {
+                "tc": "青洲",
+                "sc": "青洲",
+                "en": "Green Island"
+            },
+            "address": {
+                "tc": "青洲",
+                "sc": "青洲",
+                "en": "Green Island"
+            },
+            "coordinates": [
+                22.285,
+                114.11277778
+            ],
+            "elevation": 88
+        },
+        "6": {
+            "name": {
+                "tc": "長洲泳灘",
+                "sc": "长洲泳滩",
+                "en": "Cheung Chau Beach"
+            },
+            "address": {
+                "tc": "長洲國民路30號國民學校",
+                "sc": "长洲国民路30号国民学校",
+                "en": "Kwok Man School, 30 Kwok Man Rd, Cheung Chau"
+            },
+            "coordinates": [
+                22.21083333,
+                114.02916667
+            ],
+            "elevation": 27
+        },
+        "7": {
+            "name": {
+                "tc": "香港國際機場",
+                "sc": "香港国际机场",
+                "en": "Hong Kong International Airport"
+            },
+            "address": {
+                "tc": "大嶼山香港國際機場",
+                "sc": "大屿山香港国际机场",
+                "en": "Hong Kong International Airport, Lantau Island"
+            },
+            "coordinates": [
+                22.30944444,
+                113.92194444
+            ],
+            "elevation": 6
+        },
+        "8": {
+            "name": {
+                "tc": "香港公園",
+                "sc": "香港公园",
+                "en": "Hong Kong Park"
+            },
+            "address": {
+                "tc": "香港中環紅棉路19號",
+                "sc": "香港中环红棉路19号",
+                "en": "19 Cotton Tree Drive, Central, Hong Kong"
+            },
+            "coordinates": [
+                22.27833333,
+                114.16222222
+            ],
+            "elevation": 26
+        },
+        "9": {
+            "name": {
+                "tc": "香港天文台",
+                "sc": "香港天文台",
+                "en": "Hong Kong Observatory"
+            },
+            "address": {
+                "tc": "尖沙咀彌敦道134A號",
+                "sc": "尖沙咀弥敦道134A号",
+                "en": "134A Nathan Road, Tsim Sha Tsui"
+            },
+            "coordinates": [
+                22.30194444,
+                114.17416667
+            ],
+            "elevation": 32
+        },
+        "10": {
+            "name": {
+                "tc": "啟德",
+                "sc": "启德",
+                "en": "Kai Tak"
+            },
+            "address": {
+                "tc": "啟德跑道舊消防局",
+                "sc": "启德跑道旧消防局",
+                "en": "Old Fire Station, Kai Tak Runway"
+            },
+            "coordinates": [
+                22.30972222,
+                114.21333333
+            ],
+            "elevation": 3
+        },
+        "11": {
+            "name": {
+                "tc": "啟德跑道公園",
+                "sc": "启德跑道公园",
+                "en": "Kai Tak Runway Park"
+            },
+            "address": {
+                "tc": "啟德跑道公園",
+                "sc": "启德跑道公园",
+                "en": "Kai Tak Runway Park"
+            },
+            "coordinates": [
+                22.30472222,
+                114.21694444
+            ],
+            "elevation": 4
+        },
+        "12": {
+            "name": {
+                "tc": "滘西洲",
+                "sc": "滘西洲",
+                "en": "Kau Sai Chau"
+            },
+            "address": {
+                "tc": "賽馬會滘西洲公眾高爾夫球場",
+                "sc": "赛马会滘西洲公众高尔夫球场",
+                "en": "The Jockey Club Kau Sai Chau Public Golf Course"
+            },
+            "coordinates": [
+                22.37027778,
+                114.3125
+            ],
+            "elevation": 39
+        },
+        "13": {
+            "name": {
+                "tc": "九龍城",
+                "sc": "九龙城",
+                "en": "Kowloon City"
+            },
+            "address": {
+                "tc": "九龍仔富安街樂富配水庫休憩花園",
+                "sc": "九龙仔富安街乐富配水库休憩花园",
+                "en": "Lok Fu Service Reservoir Rest Garden, Fu On Street, Kowloon Tsai"
+            },
+            "coordinates": [
+                22.335,
+                114.18472222
+            ],
+            "elevation": 92
+        },
+        "14": {
+            "name": {
+                "tc": "京士柏",
+                "sc": "京士柏",
+                "en": "King's Park"
+            },
+            "address": {
+                "tc": "何文田京士柏京士柏道22號",
+                "sc": "何文田京士柏京士柏道22号",
+                "en": "22 King's Park Rise Homantin"
+            },
+            "coordinates": [
+                22.31194444,
+                114.17277778
+            ],
+            "elevation": 65
+        },
+        "15": {
+            "name": {
+                "tc": "南丫島",
+                "sc": "南丫岛",
+                "en": "Lamma Island"
+            },
+            "address": {
+                "tc": "榕樹灣渡輪碼頭",
+                "sc": "榕树湾渡轮码头",
+                "en": "Yung Shue Wan Ferry Pier"
+            },
+            "coordinates": [
+                22.22611111,
+                114.10861111
+            ],
+            "elevation": 7
+        },
+        "16": {
+            "name": {
+                "tc": "北潭涌",
+                "sc": "北潭涌",
+                "en": "Pak Tam Chung"
+            },
+            "address": {
+                "tc": "西貢北潭路鯽魚湖北潭涌低地抽水站",
+                "sc": "西贡北潭路鲫鱼湖北潭涌低地抽水站",
+                "en": "Pak Tam Chung Lowland Pumping Station, Tsak Yue Wu, Pak Tam Road, Sai Kung"
+            },
+            "coordinates": [
+                22.40277778,
+                114.32305556
+            ],
+            "elevation": 5
+        },
+        "17": {
+            "name": {
+                "tc": "流浮山",
+                "sc": "流浮山",
+                "en": "Lau Fau Shan"
+            },
+            "address": {
+                "tc": "流浮山警署",
+                "sc": "流浮山警署",
+                "en": "Lau Fau Shan Police Station, Lau Fau Shan"
+            },
+            "coordinates": [
+                22.46888889,
+                113.98361111
+            ],
+            "elevation": 31
+        },
+        "18": {
+            "name": {
+                "tc": "坪洲",
+                "sc": "坪洲",
+                "en": "Peng Chau"
+            },
+            "address": {
+                "tc": "坪洲警崗",
+                "sc": "坪洲警岗",
+                "en": "Ping Chau Police Post"
+            },
+            "coordinates": [
+                22.29111111,
+                114.04333333
+            ],
+            "elevation": 34
+        },
+        "19": {
+            "name": {
+                "tc": "沙田",
+                "sc": "沙田",
+                "en": "Sha Tin"
+            },
+            "address": {
+                "tc": "香港賽馬會沙田馬場",
+                "sc": "香港赛马会沙田马场",
+                "en": "Sha Tin HKJC Racecourse"
+            },
+            "coordinates": [
+                22.4025,
+                114.21
+            ],
+            "elevation": 6
+        },
+        "20": {
+            "name": {
+                "tc": "深水埗",
+                "sc": "深水埗",
+                "en": "Sham Shui Po"
+            },
+            "address": {
+                "tc": "美孚荔枝角公園",
+                "sc": "美孚荔枝角公园",
+                "en": "Lai Chi Kok Park, Mei Foo"
+            },
+            "coordinates": [
+                22.33583333,
+                114.13694444
+            ],
+            "elevation": 11
+        },
+        "21": {
+            "name": {
+                "tc": "上水",
+                "sc": "上水",
+                "en": "Sheung Shui"
+            },
+            "address": {
+                "tc": "上水金錢路金錢村",
+                "sc": "上水金钱路金钱村",
+                "en": "Kam Tsin Tsuen, Kam Tsin Road, Sheung Shui"
+            },
+            "coordinates": [
+                22.50194444,
+                114.11111111
+            ],
+            "elevation": 10
+        },
+        "22": {
+            "name": {
+                "tc": "石崗",
+                "sc": "石岗",
+                "en": "Shek Kong"
+            },
+            "address": {
+                "tc": "石崗機場",
+                "sc": "石岗机场",
+                "en": "Shek Kong Airfield, Shek Kong"
+            },
+            "coordinates": [
+                22.43611111,
+                114.08472222
+            ],
+            "elevation": 16
+        },
+        "23": {
+            "name": {
+                "tc": "打鼓嶺",
+                "sc": "打鼓岭",
+                "en": "Ta Kwu Ling"
+            },
+            "address": {
+                "tc": "打鼓嶺豬隻繁殖場",
+                "sc": "打鼓岭猪只繁殖场",
+                "en": "Ta Kwu Ling Pig Breeding Centre"
+            },
+            "coordinates": [
+                22.52861111,
+                114.15666667
+            ],
+            "elevation": 15
+        },
+        "24": {
+            "name": {
+                "tc": "赤柱",
+                "sc": "赤柱",
+                "en": "Stanley"
+            },
+            "address": {
+                "tc": "赤柱東頭灣道",
+                "sc": "赤柱东头湾道",
+                "en": "Tung Tau Wan Road, Stanley"
+            },
+            "coordinates": [
+                22.21416667,
+                114.21861111
+            ],
+            "elevation": 31
+        },
+        "25": {
+            "name": {
+                "tc": "九龍天星碼頭",
+                "sc": "九龙天星码头",
+                "en": "Star Ferry(Kowloon)"
+            },
+            "address": {
+                "tc": "尖沙咀天星碼頭",
+                "sc": "尖沙咀天星码头",
+                "en": "Tsim Sha Tsui Star Ferry Pier"
+            },
+            "coordinates": [
+                22.29305556,
+                114.16861111
+            ],
+            "elevation": 18
+        },
+        "26": {
+            "name": {
+                "tc": "大隴",
+                "sc": "大陇",
+                "en": "Tai Lung"
+            },
+            "address": {
+                "tc": "上水蓮塘尾大龍獸醫化驗所",
+                "sc": "上水莲塘尾大龙兽医化验所",
+                "en": "Tai Lung Veterinary Laboratory, Lin Tong Mei, Sheung Shui"
+            },
+            "coordinates": [
+                22.48472222,
+                114.1175
+            ],
+            "elevation": 21
+        },
+        "27": {
+            "name": {
+                "tc": "大美督",
+                "sc": "大美督",
+                "en": "Tai Mei Tuk"
+            },
+            "address": {
+                "tc": "香港警務處大美督活動訓練中心",
+                "sc": "香港警务处大美督活动训练中心",
+                "en": "Tai Mei Tuk Police Adventure Training School"
+            },
+            "coordinates": [
+                22.47527778,
+                114.2375
+            ],
+            "elevation": 51
+        },
+        "28": {
+            "name": {
+                "tc": "大帽山",
+                "sc": "大帽山",
+                "en": "Tai Mo Shan"
+            },
+            "address": {
+                "tc": "大帽山氣象站",
+                "sc": "大帽山气象站",
+                "en": "Tai Mo Shan Meteorological Station"
+            },
+            "coordinates": [
+                22.41055556,
+                114.12444444
+            ],
+            "elevation": 955
+        },
+        "29": {
+            "name": {
+                "tc": "大埔",
+                "sc": "大埔",
+                "en": "Tai Po"
+            },
+            "address": {
+                "tc": "大埔元洲仔里元洲仔自然環境保護研究中心",
+                "sc": "大埔元洲仔里元洲仔自然环境保护研究中心",
+                "en": "Island House Conservation Studies Centre, Island House Lane, Tai Po"
+            },
+            "coordinates": [
+                22.44611111,
+                114.17888889
+            ],
+            "elevation": 15
+        },
+        "30": {
+            "name": {
+                "tc": "大埔滘",
+                "sc": "大埔滘",
+                "en": "Tai Po Kau"
+            },
+            "address": {
+                "tc": "大埔鐵路碼頭",
+                "sc": "大埔铁路码头",
+                "en": "Tai Po Railway Pier"
+            },
+            "coordinates": [
+                22.4425,
+                114.18416667
+            ],
+            "elevation": 11
+        },
+        "31": {
+            "name": {
+                "tc": "大老山",
+                "sc": "大老山",
+                "en": "Tate's Cairn"
+            },
+            "address": {
+                "tc": "大老山氣象站",
+                "sc": "大老山气象站",
+                "en": "Tate's Cairn Meteorological Station"
+            },
+            "coordinates": [
+                22.35777778,
+                114.21777778
+            ],
+            "elevation": 572
+        },
+        "32": {
+            "name": {
+                "tc": "將軍澳",
+                "sc": "将军澳",
+                "en": "Tseung Kwan O"
+            },
+            "address": {
+                "tc": "將軍澳靈實醫院",
+                "sc": "将军澳灵实医院",
+                "en": "Haven of Hope Hospital, Tseung Kwan O"
+            },
+            "coordinates": [
+                22.31583333,
+                114.25555556
+            ],
+            "elevation": 38
+        },
+        "33": {
+            "name": {
+                "tc": "屯門",
+                "sc": "屯门",
+                "en": "Tuen Mun"
+            },
+            "address": {
+                "tc": "屯門散石灣北路3號屯門兒童及青少年院",
+                "sc": "屯门散石湾北路3号屯门儿童及青少年院",
+                "en": "3 San Shek Wan North Road, Tuen Mun Children and Juvenile Home, Tuen Mun"
+            },
+            "coordinates": [
+                22.38583333,
+                113.96416667
+            ],
+            "elevation": 28
+        },
+        "34": {
+            "name": {
+                "tc": "青衣",
+                "sc": "青衣",
+                "en": "Tsing Yi"
+            },
+            "address": {
+                "tc": "青衣污水處理廠",
+                "sc": "青衣污水处理厂",
+                "en": "Tsing Yi Sewage Treatment Plant"
+            },
+            "coordinates": [
+                22.34416667,
+                114.11
+            ],
+            "elevation": 8
+        },
+        "35": {
+            "name": {
+                "tc": "荃灣城門谷",
+                "sc": "荃湾城门谷",
+                "en": "Tsuen Wan Shing Mun Valley"
+            },
+            "address": {
+                "tc": "荃灣城門谷公園",
+                "sc": "荃湾城门谷公园",
+                "en": "Shing Mun Valley Park, Tsuen Wan"
+            },
+            "coordinates": [
+                22.37555556,
+                114.12666667
+            ],
+            "elevation": 35
+        },
+        "36": {
+            "name": {
+                "tc": "濕地公園",
+                "sc": "湿地公园",
+                "en": "Wetland Park"
+            },
+            "address": {
+                "tc": "天水圍濕地公園路香港濕地公園",
+                "sc": "天水围湿地公园路香港湿地公园",
+                "en": "Hong Kong Wetland Park, Wetland Park Road, Tin Shui Wai"
+            },
+            "coordinates": [
+                22.46666667,
+                114.00888889
+            ],
+            "elevation": 4
+        },
+        "37": {
+            "name": {
+                "tc": "元朗公園",
+                "sc": "元朗公园",
+                "en": "Yuen Long Park"
+            },
+            "address": {
+                "tc": "元朗公園南路",
+                "sc": "元朗公园南路",
+                "en": "Town Park Road South, Yuen Long"
+            },
+            "coordinates": [
+                22.44083333,
+                114.01833333
+            ],
+            "elevation": 8
+        },
+        "38": {
+            "name": {
+                "tc": "黃大仙",
+                "sc": "黄大仙",
+                "en": "Wong Tai Sin"
+            },
+            "address": {
+                "tc": "志蓮淨苑南蓮園池",
+                "sc": "志莲净苑南莲园池",
+                "en": "Nan Lian Garden, Chi Lin Nunnery"
+            },
+            "coordinates": [
+                22.33944444,
+                114.20527778
+            ],
+            "elevation": 21
+        },
+        "39": {
+            "name": {
+                "tc": "黃竹坑",
+                "sc": "黄竹坑",
+                "en": "Wong Chuk Hang"
+            },
+            "address": {
+                "tc": "黃竹坑海洋公園道18號香港警察學院",
+                "sc": "黄竹坑海洋公园道18号香港警察学院",
+                "en": "Hong Kong Police College, 18 Ocean Park Road, Wong Chuk Hang"
+            },
+            "coordinates": [
+                22.24777778,
+                114.17361111
+            ],
+            "elevation": 5
+        },
+        "40": {
+            "name": {
+                "tc": "橫瀾島",
+                "sc": "横澜岛",
+                "en": "Waglan Island"
+            },
+            "address": {
+                "tc": "橫瀾島",
+                "sc": "横澜岛",
+                "en": "Waglan Island"
+            },
+            "coordinates": [
+                22.18222222,
+                114.30333333
+            ],
+            "elevation": 56
+        },
+        "41": {
+            "name": {
+                "tc": "荃灣可觀",
+                "sc": "荃湾可观",
+                "en": "Tsuen Wan Ho Koon"
+            },
+            "address": {
+                "tc": "荃灣荃錦公路101號可觀自然教育中心暨天文館",
+                "sc": "荃湾荃锦公路101号可观自然教育中心暨天文馆",
+                "en": "Ho Koon Nature Education cum Astronomical Centre, 101 Route Twisk, Tsuen Wan"
+            },
+            "coordinates": [
+                22.38361111,
+                114.10777778
+            ],
+            "elevation": 142
+        },
+        "42": {
+            "name": {
+                "tc": "塔門",
+                "sc": "塔门",
+                "en": "Tap Mun"
+            },
+            "address": {
+                "tc": "塔門",
+                "sc": "塔门",
+                "en": "Tap Mun"
+            },
+            "coordinates": [
+                22.47138889,
+                114.36055556
+            ],
+            "elevation": 15
+        },
+        "43": {
+            "name": {
+                "tc": "山頂",
+                "sc": "山顶",
+                "en": "The Peak"
+            },
+            "address": {
+                "tc": "山頂山頂道92號山頂警署",
+                "sc": "山顶山顶道92号山顶警署",
+                "en": "Peak Police Station, 92 Peak Road, The Peak"
+            },
+            "coordinates": [
+                22.26416667,
+                114.155
+            ],
+            "elevation": 406
+        },
+        "44": {
+            "name": {
+                "tc": "筲箕灣",
+                "sc": "筲箕湾",
+                "en": "Shau Kei Wan"
+            },
+            "address": {
+                "tc": "筲箕灣東喜道175號香港海防博物館",
+                "sc": "筲箕湾东喜道175号香港海防博物馆",
+                "en": "HK Museum of Coastal Defence, 175 Tung Hei Road, Shau Kei Wan"
+            },
+            "coordinates": [
+                22.28166667,
+                114.23611111
+            ],
+            "elevation": 53
+        },
+        "45": {
+            "name": {
+                "tc": "西貢",
+                "sc": "西贡",
+                "en": "Sai Kung"
+            },
+            "address": {
+                "tc": "西貢對面海華容路水警總區總部水警港外區水警東分區",
+                "sc": "西贡对面海华容路水警总区总部水警港外区水警东分区",
+                "en": "Marine Outer Waters District Headquarters & Marine East Division Base, Tui Min Hoi, Sai Kung"
+            },
+            "coordinates": [
+                22.37555556,
+                114.27444444
+            ],
+            "elevation": 4
+        },
+        "46": {
+            "name": {
+                "tc": "沙洲",
+                "sc": "沙洲",
+                "en": "Sha Chau"
+            },
+            "address": {
+                "tc": "沙洲",
+                "sc": "沙洲",
+                "en": "Sha Chau Island"
+            },
+            "coordinates": [
+                22.34583333,
+                113.89111111
+            ],
+            "elevation": 31
+        },
+        "47": {
+            "name": {
+                "tc": "昂坪",
+                "sc": "昂坪",
+                "en": "Ngong Ping"
+            },
+            "address": {
+                "tc": "大嶼山昂坪",
+                "sc": "大屿山昂坪",
+                "en": "Ngong Ping, Lantau Island"
+            },
+            "coordinates": [
+                22.25861111,
+                113.91277778
+            ],
+            "elevation": 593
+        },
+        "48": {
+            "name": {
+                "tc": "觀塘",
+                "sc": "观塘",
+                "en": "Kwun Tong"
+            },
+            "address": {
+                "tc": "觀塘和康徑牛頭角配水庫通訊事務管理局無線電監察組",
+                "sc": "观塘和康径牛头角配水库通讯事务管理局无线电监察组",
+                "en": "Radio Monitoring Unit, OFTA, Ngau Tau Kok service reservoir, Wo Hong Path, Koon Tong"
+            },
+            "coordinates": [
+                22.31861111,
+                114.22472222
+            ],
+            "elevation": 90
+        },
+        "49": {
+            "name": {
+                "tc": "雙魚河",
+                "sc": "双鱼河",
+                "en": "Beas River"
+            },
+            "address": {
+                "tc": "上水雙魚河",
+                "sc": "上水双鱼河",
+                "en": "Beas river, Sheung Shui"
+            },
+            "coordinates": [
+                22.49333333,
+                114.105
+            ],
+            "elevation": 11
+        }
+    },
+    "aliases": {
+        "temp": {
+            "Central Pier": 1,
+            "Cheung Chau": 2,
+            "Clear Water Bay": 3,
+            "Happy Valley": 4,
+            "Green Island": 5,
+            "Cheung Chau Beach": 6,
+            "Chek Lap Kok": 7,
+            "HK Park": 8,
+            "HK Observatory": 9,
+            "Kai Tak": 10,
+            "Kai Tak Runway Park": 11,
+            "Kau Sai Chau": 12,
+            "Kowloon City": 13,
+            "King's Park": 14,
+            "Lamma Island": 15,
+            "Pak Tam Chung": 16,
+            "Lau Fau Shan": 17,
+            "Peng Chau": 18,
+            "Sha Tin": 19,
+            "Sham Shui Po": 20,
+            "Sheung Shui": 21,
+            "Shek Kong": 22,
+            "Ta Kwu Ling": 23,
+            "Stanley": 24,
+            "Star Ferry(Kowloon)": 25,
+            "Tai Lung": 26,
+            "Tai Mei Tuk": 27,
+            "Tai Mo Shan": 28,
+            "Tai Po": 29,
+            "Tai Po Kau": 30,
+            "Tate's Cairn": 31,
+            "Tseung Kwan O": 32,
+            "Tuen Mun": 33,
+            "Tsing Yi": 34,
+            "Tsuen Wan Shing Mun Valley": 35,
+            "Wetland Park": 36,
+            "Yuen Long Park": 37,
+            "Wong Tai Sin": 38,
+            "Wong Chuk Hang": 39,
+            "Waglan Island": 40,
+            "Tsuen Wan Ho Koon": 41,
+            "Tap Mun": 42,
+            "The Peak": 43,
+            "Shau Kei Wan": 44,
+            "Sai Kung": 45,
+            "Sha Chau": 46,
+            "Ngong Ping": 47,
+            "Kwun Tong": 48,
+            "Beas River": 49
+        }
+    }
+}
