@@ -9,9 +9,9 @@ export default {
         switch (target) {
             case "temp":
                 const tempData = await fetchTempData();
-                return Response.json(tempData);
+                return getCORSResponse(tempData);
             case "stations":
-                return Response.json(stationsData.stations);
+                return getCORSResponse(stationsData.stations);
             default:
                 return Response.json(
                     { error: "Target parameter missing/invalid" },
@@ -20,6 +20,14 @@ export default {
         }
     }
 };
+
+function getCORSResponse(data) {
+    return Response.json(data, {
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        }
+    });
+}
 
 async function fetchTempData() {
     const rawTempDataResponse = await fetch("https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_temperature.csv");
