@@ -8,7 +8,9 @@ export default {
 
         switch (target) {
             case "temp":
-                const tempData = await fetchTempData();
+                let tempData = {};
+                tempData = await fetchTempData(tempData);
+                tempData = await fetchMinMaxTempData(tempData);
                 return getCORSResponse(tempData);
             case "stations":
                 return getCORSResponse(stationsData.stations);
@@ -29,25 +31,71 @@ function getCORSResponse(data) {
     });
 }
 
-async function fetchTempData() {
+async function fetchMinMaxTempData(appendData) {
+    const rawTempDataResponse = await fetch("https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_since_midnight_maxmin.csv");
+    if (!rawTempDataResponse.ok) {
+        throw new Error(`HKO API error: ${rawTempDataResponse.status}`);
+    }
+    const rawTempData = await rawTempDataResponse.text();
+
+    let tempData = appendData;
+    for (const rawTempDataLine of rawTempData.trim().split("\n").slice(1)) {
+        const stationTempData = rawTempDataLine.split(",");
+
+        if (!(stationTempData[1] in aliasMap)) {
+            console.log(stationTempData[1] + " does not have a valid alias map.");
+            continue;
+        }
+
+        if (!isFinite(stationTempData[2])){
+            console.log(stationTempData[2] + " is not a valid temperature.");
+            continue;
+        }
+
+        if (!isFinite(stationTempData[3])){
+            console.log(stationTempData[3] + " is not a valid temperature.");
+            continue;
+        }
+
+        const stationId = Number(aliasMap[stationTempData[1]]);
+        const stationMinTemp = Number(stationTempData[3]);
+        const stationMaxTemp = Number(stationTempData[2]);
+        if (!tempData["time"]) tempData["time"] = hkoTimeFormat(stationTempData[0]);
+        if (!tempData["data"]) tempData["data"] = {};
+        if (!tempData["data"][stationId]) tempData["data"][stationId] = {};
+        tempData["data"][stationId]["minTemp"] = stationMinTemp;
+        tempData["data"][stationId]["maxTemp"] = stationMaxTemp;
+    }
+    return tempData;
+}
+
+async function fetchTempData(appendData) {
     const rawTempDataResponse = await fetch("https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_temperature.csv");
     if (!rawTempDataResponse.ok) {
         throw new Error(`HKO API error: ${rawTempDataResponse.status}`);
     }
     const rawTempData = await rawTempDataResponse.text();
 
-    let tempData = {};
+    let tempData = appendData;
     for (const rawTempDataLine of rawTempData.trim().split("\n").slice(1)) {
         const stationTempData = rawTempDataLine.split(",");
-        const stationId = Number(aliasMap[stationTempData[1]]);
-        const stationTemp = Number(stationTempData[2]);
-        if (isNaN(stationId)) {
+
+        if (!(stationTempData[1] in aliasMap)) {
             console.log(stationTempData[1] + " does not have a valid alias map.");
             continue;
         }
+
+        if (!isFinite(stationTempData[2])){
+            console.log(stationTempData[2] + " is not a valid temperature.");
+            continue;
+        }
+
+        const stationId = Number(aliasMap[stationTempData[1]]);
+        const stationTemp = Number(stationTempData[2]);
         if (!tempData["time"]) tempData["time"] = hkoTimeFormat(stationTempData[0]);
         if (!tempData["data"]) tempData["data"] = {};
-        tempData["data"][stationId] = stationTemp;
+        if (!tempData["data"][stationId]) tempData["data"][stationId] = {};
+        tempData["data"][stationId]["temp"] = stationTemp;
     }
     return tempData;
 }
