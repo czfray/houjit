@@ -7,7 +7,7 @@ export default {
     async scheduled(event, env) {
         const report = await TenMinReport.fetchTenMinReport(aliasMap);
         await putStorage(env, "tenMinReport", report);
-        console.log("Ten Minute Report fetched!");
+        console.log(`${report["time"]} Ten Minute Report fetched!`);
     },
 
     async fetch(request, env) {
@@ -40,7 +40,9 @@ async function getStorage(env, name){
 function getCORSResponse(data) {
     return Response.json(data, {
         headers: {
-            "Access-Control-Allow-Origin": "*"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "no-store"
         }
     });
 }

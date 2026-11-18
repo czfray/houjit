@@ -1,5 +1,10 @@
 export async function processHkoCsv(csvUrl, perLineProcess){
-    const response = await fetch(csvUrl);
+    const response = await fetch(csvUrl, {
+        cf: {
+            cacheTtl: 0
+        }
+    });
+    
     if (!response.ok) {
         throw new Error(`HKO API error when fetching CSV: ${response.status}`);
     }
