@@ -1,20 +1,6 @@
 export async function processHkoCsv(csvUrl, perLineProcess){
-    const response = await fetch(`${csvUrl}?t=${Date.now()}`, {
-        headers: {
-        "Cache-Control": "no-cache",
-        "Pragma": "no-cache"
-        },
-
-        cf: {
-            cacheTtl: 0
-        }
-    });
-
-    console.log("URL:", csvUrl);
-    console.log("CF-Cache-Status:", response.headers.get("CF-Cache-Status"));
-    console.log("Age:", response.headers.get("Age"));
-    console.log("Date:", response.headers.get("Date"));
-    console.log("ETag:", response.headers.get("ETag"));
+    const response = await fetch(`${csvUrl}?t=${Date.now()}`);
+    console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}`);
     
     if (!response.ok) {
         throw new Error(`HKO API error when fetching CSV: ${response.status}`);
