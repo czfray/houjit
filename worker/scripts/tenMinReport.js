@@ -1,4 +1,5 @@
 import * as Utils from "./utils.js"
+import csvLoadDatas from "../data/tenMinReportCsvList.json";
 
 let report;
 let aliasMap;
@@ -6,68 +7,16 @@ let aliasMap;
 export async function fetchTenMinReport(_aliasMap){
     report = {};
     aliasMap = _aliasMap;
-
-    await Promise.all([
-        fetchAirTempData(),
-        fetchMinMaxTempData(),
-        fetchHumidity()
-    ]);
+    
+    await fetchCsvsFromJson();
 
     return report;
 }
 
-async function fetchAirTempData(){
-    const airTempUrl = "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_temperature.csv";
-    await mapCsvToReport(airTempUrl, {
-        "station" : {
-            "index": 1
-        },
-        "time" : {
-            "index": 0
-        },
-        "temp" : {
-            "index": 2,
-            "type": "number"
-        }
-    });
-}
-
-async function fetchMinMaxTempData(){
-    const airTempUrl = "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_since_midnight_maxmin.csv";
-    await mapCsvToReport(airTempUrl, {
-        "station" : {
-            "index": 1
-        },
-        "time" : {
-            "index": 0
-        },
-        "maxTemp" : {
-            "index": 2,
-            "type": "number",
-            "note": "*end"
-        },
-        "minTemp" : {
-            "index": 3,
-            "type": "number",
-            "note": "*end"
-        }
-    });
-}
-
-async function fetchHumidity(){
-    const airTempUrl = "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_humidity.csv";
-    await mapCsvToReport(airTempUrl, {
-        "station" : {
-            "index": 1
-        },
-        "time" : {
-            "index": 0
-        },
-        "humid" : {
-            "index": 2,
-            "type": "number"
-        }
-    });
+async function fetchCsvsFromJson(){
+    await Promise.all(
+        csvLoadDatas.map(data => mapCsvToReport(data.url, data.map))
+    );
 }
 
 async function mapCsvToReport(csvUrl, mapping){
@@ -78,9 +27,13 @@ async function mapCsvToReport(csvUrl, mapping){
 
         const statonIdIndex = mapping["station"].index;
         if (isInvalidIndex(statonIdIndex, dataInLine.length)) throw new Error(`CSV to report mapping is incorrect: ${statonIdIndex} is not a valid index.`);
-        if (!(dataInLine[statonIdIndex] in aliasMap)) throw new Error(dataInLine[statonIdIndex] + " does not have a valid alias map.");
-        if (!Number.isInteger(aliasMap[dataInLine[statonIdIndex]])) throw new Error(dataInLine[statonIdIndex] + "'s alias map is not an integer.");
-        const stationId = Number(aliasMap[dataInLine[statonIdIndex]]);
+
+        let stationAlias = dataInLine[statonIdIndex];
+        if (stationAlias.startsWith('"') && stationAlias.endsWith('"')) stationAlias = stationAlias.slice(1, -1);
+
+        if (!Object.hasOwn(aliasMap, stationAlias)) throw new Error(stationAlias + " does not have a valid alias map.");
+        if (!Number.isInteger(aliasMap[stationAlias])) throw new Error(stationAlias + "'s alias map is not an integer.");
+        const stationId = Number(aliasMap[stationAlias]);
 
         if (!report["data"]) report["data"] = {};
         if (!report["data"][stationId]) report["data"][stationId] = {};
@@ -97,6 +50,8 @@ async function mapCsvToReport(csvUrl, mapping){
             const type = mapping[name].type;
             let data = dataInLine[index];
 
+            if (data.startsWith('"') && data.endsWith('"')) data = data.slice(1, -1);
+
             if (name === "time") {
                 if (report["time"]) continue;
                 if (typeof data !== "string" || data.length !== 12) {
@@ -110,8 +65,14 @@ async function mapCsvToReport(csvUrl, mapping){
             switch (mapping[name].note){
                 case "*end":
                     if (data.endsWith("*")) {
-                        data = data.slice(0, -1);
+                        data = data.slice(0, -1).trim();
                     }
+                    break;
+                case "kmend":
+                    if (data.endsWith("km")) {
+                        data = data.replace("km", "").trim();
+                    }
+                    break;
                 default:
                     break;
             }
@@ -125,8 +86,8 @@ async function mapCsvToReport(csvUrl, mapping){
                     report["data"][stationId][name] = Number(data);
                     break;
                 default:
-                    if (data == null){
-                        console.log(`A data is not null. (${name}) (${stationId})`);
+                    if (data == null || data === "N/A"){
+                        console.log(`A data is null or N/A. (${name}) (${stationId})`);
                         continue;
                     }
                     report["data"][stationId][name] = data;

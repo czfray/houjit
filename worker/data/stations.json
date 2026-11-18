@@ -832,6 +832,23 @@
                 114.105
             ],
             "elevation": 11
+        },
+        "50": {
+            "name": {
+                "tc": "北角",
+                "sc": "北角",
+                "en": "North Point"
+            },
+            "address": {
+                "tc": "北角",
+                "sc": "北角",
+                "en": "North Point"
+            },
+            "coordinates": [
+                22.294444,
+                114.199722
+            ],
+            "elevation": 26
         }
     },
     "aliases": {
@@ -860,7 +877,7 @@
             "Shek Kong": 22,
             "Ta Kwu Ling": 23,
             "Stanley": 24,
-            "Star Ferry(Kowloon)": 25,
+            "Star Ferry": 25,
             "Tai Lung": 26,
             "Tai Mei Tuk": 27,
             "Tai Mo Shan": 28,
@@ -884,7 +901,11 @@
             "Sha Chau": 46,
             "Ngong Ping": 47,
             "Kwun Tong": 48,
-            "Beas River": 49
+            "Beas River": 49,
+            "Sai Wan Ho": 44,
+            "Central": 1,
+            "Hong Kong Sea School": 24,
+            "North Point": 50
         }
     }
 }

@@ -1,6 +1,9 @@
+//npx wrangler dev --test-scheduled -c worker/wrangler.jsonc
+//curl -s http://localhost:8787/__scheduled OR Invoke-WebRequest -Uri "http://localhost:8787/__scheduled" 
+
 import * as TenMinReport from "./scripts/tenMinReport.js";
 
-import stationsData from "./stations.json";
+import stationsData from "./data/stations.json";
 const aliasMap = stationsData.aliases.general;
 
 export default {

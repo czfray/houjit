@@ -1,0 +1,96 @@
+[
+    {
+        "url": "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_temperature.csv",
+        "map": {
+            "station": {
+                "index": 1
+            },
+            "time": {
+                "index": 0
+            },
+            "temp": {
+                "index": 2,
+                "type": "number"
+            }
+        }
+    },
+
+    {
+        "url": "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_since_midnight_maxmin.csv",
+        "map": {
+            "station": {
+                "index": 1
+            },
+            "time": {
+                "index": 0
+            },
+            "maxTemp": {
+                "index": 2,
+                "type": "number",
+                "note": "*end"
+            },
+            "minTemp": {
+                "index": 3,
+                "type": "number",
+                "note": "*end"
+            }
+        }
+    },
+
+    {
+        "url": "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_humidity.csv",
+        "map": {
+            "station": {
+                "index": 1
+            },
+            "time": {
+                "index": 0
+            },
+            "humid": {
+                "index": 2,
+                "type": "number"
+            }
+        }
+    },
+
+    {
+        "url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=LTMV&lang=en&rformat=csv",
+        "map": {
+            "station": {
+                "index": 1
+            },
+            "time": {
+                "index": 0
+            },
+            "visib": {
+                "index": 2,
+                "type": "number",
+                "note": "kmend"
+            }
+        }
+    },
+
+    {
+        "url": "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_10min_wind.csv",
+        "map": {
+            "station": {
+                "index": 1
+            },
+            "time": {
+                "index": 0
+            },
+            "windDir": {
+                "index": 2,
+                "type": "string"
+            },
+            "windSpd": {
+                "index": 3,
+                "type": "number"
+            },
+            "maxWindSpd": {
+                "index": 4,
+                "type": "number"
+            }
+        }
+    }
+]

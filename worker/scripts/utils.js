@@ -1,5 +1,8 @@
 export async function processHkoCsv(csvUrl, perLineProcess){
-    const response = await fetch(`${csvUrl}?t=${Date.now()}`);
+    const url = new URL(csvUrl);
+    url.searchParams.set("t", Date.now());
+    
+    const response = await fetch(url);
     console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}`);
     
     if (!response.ok) {
