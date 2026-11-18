@@ -1,5 +1,10 @@
 export async function processHkoCsv(csvUrl, perLineProcess){
     const response = await fetch(csvUrl, {
+        headers: {
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache"
+        },
+        
         cf: {
             cacheTtl: 0
         }
