@@ -37,9 +37,9 @@ with open("stations.json", "w", encoding="utf-8") as file:
     storeData = {
         "stations": stationData,
         "aliases": {
-            "temp": tempAliasData
+            "general": tempAliasData
         }
     }
     json.dump(storeData, file, indent=4, ensure_ascii=False)
 
-print("Remember to check temp alias after generation!")
+print("Remember to check aliases after generation!")

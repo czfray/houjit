@@ -1,5 +1,16 @@
 {
     "name": "houjit-backend",
     "main": "worker.js",
-    "compatibility_date": "2026-11-10"
+    "compatibility_date": "2026-11-18",
+
+    "kv_namespaces": [
+        {
+            "binding": "HOUJIT_KV",
+            "id": "6206f151e2814ae18b56ae644edbd356"
+        }
+    ],
+
+    "triggers": {
+        "crons": ["* * * * *"]
+    }
 }
