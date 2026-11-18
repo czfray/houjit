@@ -9,7 +9,8 @@ export async function fetchTenMinReport(_aliasMap){
 
     await Promise.all([
         fetchAirTempData(),
-        fetchMinMaxTempData()
+        fetchMinMaxTempData(),
+        fetchHumidity()
     ]);
 
     return report;
@@ -49,6 +50,22 @@ async function fetchMinMaxTempData(){
             "index": 3,
             "type": "number",
             "note": "*end"
+        }
+    });
+}
+
+async function fetchHumidity(){
+    const airTempUrl = "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_1min_humidity.csv";
+    await mapCsvToReport(airTempUrl, {
+        "station" : {
+            "index": 1
+        },
+        "time" : {
+            "index": 0
+        },
+        "humid" : {
+            "index": 2,
+            "type": "number"
         }
     });
 }

@@ -25,6 +25,9 @@ if (station in tempData.data) {
     const test3Viewer = document.getElementById("test3");
     test3Viewer.textContent = tempData.time;
 
+    const test4Viewer = document.getElementById("test4");
+    test4Viewer.textContent = tempData.data[station].humid + "%";
+
 }
 
 
