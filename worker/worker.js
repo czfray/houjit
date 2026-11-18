@@ -7,7 +7,8 @@ export default {
     async scheduled(event, env) {
         const report = await TenMinReport.fetchTenMinReport(aliasMap);
         await putStorage(env, "tenMinReport", report);
-        console.log(`${report["time"]} Ten Minute Report fetched!`);
+        console.log(`[${report["time"]}] Ten Minute Report fetched!`);
+        console.log(`${report.data["2"]["temp"]} ${report.data["3"]["temp"]} ${report.data["4"]["temp"]}`)
     },
 
     async fetch(request, env) {
