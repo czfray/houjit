@@ -1,7 +1,7 @@
 {
     "name": "houjit",
     "main": "worker.js",
-    "compatibility_date": "2026-11-18",
+    "compatibility_date": "2026-11-19",
 
     "kv_namespaces": [
         {
@@ -11,7 +11,7 @@
     ],
 
     "triggers": {
-        "crons": ["* * * * *"]
+        "crons": ["*/3 * * * *"]
     },
 
     "observability": {
