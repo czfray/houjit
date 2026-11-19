@@ -43,7 +43,8 @@ async function mapCsvToReport(csvUrl, mapping){
             if (name === "station") continue; //We have extracted the info already
 
             if (isInvalidIndex(mapping[name].index, dataInLine.length)){
-                throw new Error(`CSV to report mapping is incorrect: ${mapping[name].index} is not a valid index.`);
+                console.log(`CSV to report mapping is incorrect: ${mapping[name].index} is not a valid index. (${name}, ${dataInLine})`);
+                continue;
             }
 
             const index = Number(mapping[name].index);
