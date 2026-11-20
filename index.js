@@ -23,11 +23,25 @@ if (station in tempData.data) {
     test2Viewer.textContent = tempData.data[station].minTemp + "° - " + tempData.data[station].maxTemp + "°";
 
     const test3Viewer = document.getElementById("test3");
-    test3Viewer.textContent = tempData.time;
+    test3Viewer.textContent = formatHkTime(tempData["worker-time"]);
+
+    const test5Viewer = document.getElementById("test5");
+    test5Viewer.textContent = formatHkTime(tempData["hko-time"]);
 
     const test4Viewer = document.getElementById("test4");
     test4Viewer.textContent = tempData.data[station].humid + "%";
 
 }
 
-
+function formatHkTime(date){
+    return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Hong_Kong',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    }).format(new Date(date));
+}

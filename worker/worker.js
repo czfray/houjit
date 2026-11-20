@@ -2,15 +2,17 @@
 //curl -s http://localhost:8787/__scheduled OR Invoke-WebRequest -Uri "http://localhost:8787/__scheduled" 
 
 import * as TenMinReport from "./scripts/tenMinReport.js";
+import * as Utils from "./scripts/utils.js";
 
 import stationsData from "./data/stations.json";
 const aliasMap = stationsData.aliases.general;
 
 export default {
     async scheduled(event, env) {
-        const report = await TenMinReport.fetchTenMinReport(aliasMap);
+        let report = await TenMinReport.fetchTenMinReport(aliasMap);
+        report["worker-time"] = Utils.getWorkerTime();
         await putStorage(env, "tenMinReport", report);
-        console.log(`[${report["time"]}] Ten Minute Report fetched!`);
+        console.log(`[${Utils.formatHkTime(report["worker-time"])} | ${Utils.formatHkTime(report["hko-time"])}] Ten Minute Report fetched!`);
     },
 
     async fetch(request, env) {

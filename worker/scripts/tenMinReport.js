@@ -51,15 +51,16 @@ async function mapCsvToReport(csvUrl, mapping){
             const type = mapping[name].type;
             let data = dataInLine[index];
 
-            if (data.startsWith('"') && data.endsWith('"')) data = data.slice(1, -1);
+            if (data.startsWith('"') && data.endsWith('"')) data = data.slice(1, -1).trim();
+            if (data.endsWith("/")) data = data.slice(0, -1).trim();
 
             if (name === "time") {
-                if (report["time"]) continue;
+                if (report["hko-time"]) continue;
                 if (typeof data !== "string" || data.length !== 12) {
                     console.log(data + " is not a valid HKO time.");
                     continue;
                 }
-                report["time"] = Utils.formatHkoTime(dataInLine[index]);
+                report["hko-time"] = Utils.formatHkoTime(dataInLine[index]);
                 continue;
             }
 
@@ -81,14 +82,14 @@ async function mapCsvToReport(csvUrl, mapping){
             switch (type){
                 case "number":
                     if (data == null || data.trim() === "" || !Number.isFinite(Number(data))){
-                        console.log(`${data} is not a number. (${name}) (${stationId})`);
+                        console.log(`${data} is not a number. (${name}) (${stationId}) (${dataInLine})`);
                         continue;
                     }
                     report["data"][stationId][name] = Number(data);
                     break;
                 default:
                     if (data == null || data === "N/A"){
-                        console.log(`A data is null or N/A. (${name}) (${stationId})`);
+                        console.log(`A data is null or N/A. (${name}) (${stationId}) (${dataInLine})`);
                         continue;
                     }
                     report["data"][stationId][name] = data;
