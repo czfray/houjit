@@ -30,3 +30,22 @@
 body {
     background-color: var(--black)
 }
+
+.topElementContainer{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-self: center;
+}
+
+.topElement {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    justify-self: center;
+}
+
+.topElementText{
+    color: var(--dark-white);
+    font-size: 24px;
+}

@@ -12,26 +12,11 @@ const tempData = await tempDataResponse.json();
 
 console.log(tempData);
 
-const stationViewer = document.getElementById("station");
-stationViewer.textContent = stationData[station].name.tc + " " + stationData[station].name.en;
+const humidViewer = document.getElementById("humid");
+humidViewer.textContent = tempData.data[station].humid + "%";
 
-if (station in tempData.data) {
-    const testViewer = document.getElementById("test");
-    testViewer.textContent = tempData.data[station].temp.toFixed(1) + "°";
-
-    const test2Viewer = document.getElementById("test2");
-    test2Viewer.textContent = tempData.data[station].minTemp + "° - " + tempData.data[station].maxTemp + "°";
-
-    const test3Viewer = document.getElementById("test3");
-    test3Viewer.textContent = formatHkTime(tempData["worker-time"]);
-
-    const test5Viewer = document.getElementById("test5");
-    test5Viewer.textContent = formatHkTime(tempData["hko-time"]);
-
-    const test4Viewer = document.getElementById("test4");
-    test4Viewer.textContent = tempData.data[station].humid + "%";
-
-}
+const windViewer = document.getElementById("wind");
+windViewer.textContent = tempData.data[station].windSpd + " km/h";
 
 function formatHkTime(date){
     return new Intl.DateTimeFormat('en-GB', {
