@@ -1,34 +1,39 @@
+import *  as Utils from "./scripts/utils.js"
+
 const devMode = window.location.hostname !== "czfray.github.io";
 const apiUrl = devMode ? "http://127.0.0.1:8787": "https://houjit.czfray.workers.dev";
 console.log("Dev mode: " + devMode);
 
 let station = 19;
 
-const stationDataResponse = await fetch(`${apiUrl}?target=stations`);
-const stationData = await stationDataResponse.json();
-
 const tempDataResponse = await fetch(`${apiUrl}?target=report`);
 const tempData = await tempDataResponse.json();
 
 console.log(tempData);
 
+const uvViewer = document.getElementById("uv");
+uvViewer.textContent = tempData.data["global"].uv;
+
 const humidViewer = document.getElementById("humid");
-humidViewer.textContent = tempData.data[station].humid + "%";
+humidViewer.textContent = tempData.data["stationSpec"][station].humid + "%";
 
 const windViewer = document.getElementById("wind");
-windViewer.textContent = tempData.data[station].windSpd + " km/h";
+windViewer.textContent = tempData.data["stationSpec"][station].windSpd + " km/h";
 
 const tempViewer = document.getElementById("temp");
-tempViewer.textContent = tempData.data[station].temp.toFixed(1) + "°";
+tempViewer.textContent = tempData.data["stationSpec"][station].temp.toFixed(1) + "°";
 
 const minTempViewer = document.getElementById("minTemp");
-minTempViewer.textContent = tempData.data[station].minTemp.toFixed(1) + "°";
+minTempViewer.textContent = tempData.data["stationSpec"][station].minTemp.toFixed(1) + "°";
 
 const maxTempViewer = document.getElementById("maxTemp");
-maxTempViewer.textContent = tempData.data[station].maxTemp.toFixed(1) + "°";
+maxTempViewer.textContent = tempData.data["stationSpec"][station].maxTemp.toFixed(1) + "°";
 
-const workerDelay = Math.floor((new Date() - new Date(tempData["worker-time"])) / 60000);
-const hkoDelay = Math.floor((new Date(tempData["worker-time"]) - new Date(tempData["hko-time"]))/60000);
+const aprntTempViewer = document.getElementById("aprntTemp");
+aprntTempViewer.textContent = Utils.getApparentTemp(tempData.data["stationSpec"][station].temp, tempData.data["stationSpec"][station].humid, tempData.data["stationSpec"][station].windSpd).toFixed(1) + "°";
+
+const workerDelay = Math.floor((new Date() - new Date(tempData["workerTime"])) / 60000);
+const hkoDelay = Math.floor((new Date(tempData["workerTime"]) - new Date(tempData["hkoTime"]))/60000);
 
 const lastUpdateViewer = document.getElementById("lastUpdate");
 lastUpdateViewer.textContent = `Last Updated ${workerDelay}+${hkoDelay} mins ago`;

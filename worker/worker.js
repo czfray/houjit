@@ -10,9 +10,9 @@ const aliasMap = stationsData.aliases.general;
 export default {
     async scheduled(event, env) {
         let report = await TenMinReport.fetchTenMinReport(aliasMap);
-        report["worker-time"] = Utils.getWorkerTime();
+        report["workerTime"] = Utils.getWorkerTime();
         await putStorage(env, "tenMinReport", report);
-        console.log(`[${Utils.formatHkTime(report["worker-time"])} | ${Utils.formatHkTime(report["hko-time"])}] Ten Minute Report fetched!`);
+        console.log(`[${Utils.formatHkTime(report["workerTime"])} | ${Utils.formatHkTime(report["hkoTime"])}] Ten Minute Report fetched!`);
     },
 
     async fetch(request, env) {
@@ -23,8 +23,6 @@ export default {
             case "report":
                 const report = await getStorage(env, "tenMinReport");
                 return getCORSResponse(report);
-            case "stations":
-                return getCORSResponse(stationsData.stations);
             default:
                 return Response.json(
                     { error: "Target parameter missing/invalid" },

@@ -5,24 +5,83 @@ let report;
 let aliasMap;
 
 export async function fetchTenMinReport(_aliasMap){
-    report = {};
-    aliasMap = _aliasMap;
-    
-    await fetchCsvsFromJson();
+    initialiseReport(_aliasMap);
+    await Promise.all([
+        fetchStnSpecCsvsFromJson(),
+        
+        mapGlobalCsvToReport(
+            "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_15min_uvindex.csv",
+            "uv", "number", "zeroIfBlank", 1
+        ),
 
+        mapPosSpecCsvToReport(
+            "https://data.weather.gov.hk/weatherAPI/hko_data/F3/Gridded_rainfall_nowcast.csv",
+            "rain", "number", "", 2, 3, 4
+        )
+    ]);
     return report;
 }
 
-async function fetchCsvsFromJson(){
+function initialiseReport(_aliasMap){
+    report = {};
+    aliasMap = _aliasMap;
+    report["data"] = {};
+    report["data"]["global"] = {};
+    report["data"]["stationSpec"] = {};
+    report["data"]["posSpec"] = {};
+}
+
+async function mapGlobalCsvToReport(csvUrl, name, type, note, dataIndex){
+    await Utils.processHkoCsv(csvUrl, (dataInLine) => {
+        if (isInvalidIndex(dataIndex, dataInLine.length)){
+            console.log(`Data index is invalid. (data:${dataIndex}) ${dataInLine} (${name})`);
+            return;
+        }
+
+        let data = dataInLine[dataIndex];
+        data = checkNote(data, note);
+        data = checkType(data, type);
+
+        if (data == null) {
+            console.log(`This line did not pass the type check: ${dataInLine} (${name})`);
+            return;
+        }
+        report["data"]["global"][name] = data;
+        return;
+    });
+}
+
+async function mapPosSpecCsvToReport(csvUrl, name, type, note, latIndex, lonIndex, dataIndex){
+    report["data"]["posSpec"][name] = {};
+    await Utils.processHkoCsv(csvUrl, (dataInLine) => {
+        if (isInvalidIndex(latIndex, dataInLine.length) || isInvalidIndex(lonIndex, dataInLine.length) || isInvalidIndex(dataIndex, dataInLine.length)){
+            console.log(`Index/Indices is invalid. (lat:${latIndex}, lon:${lonIndex}, data:${dataIndex}) ${dataInLine} (${name})`);
+            return;
+        }
+
+        const lat = dataInLine[latIndex];
+        const lon = dataInLine[lonIndex];
+        let data = dataInLine[dataIndex];
+        data = checkNote(data, note);
+        data = checkType(data, type);
+        if (data == null) {
+            console.log(`This line did not pass the type check: ${dataInLine} (${name})`);
+            return;
+        }
+
+        report["data"]["posSpec"][name][`${lat},${lon}`] = data;
+    });
+}
+
+async function fetchStnSpecCsvsFromJson(){
     await Promise.all(
-        csvLoadDatas.map(data => mapCsvToReport(data.url, data.map))
+        csvLoadDatas.map(data => mapStnSpecCsvToReport(data.url, data.map))
     );
 }
 
-async function mapCsvToReport(csvUrl, mapping){
+async function mapStnSpecCsvToReport(csvUrl, mapping){
     await Utils.processHkoCsv(csvUrl, (dataInLine) => {
 
-        //First look up for stationId
         if (!("station" in mapping)) throw new Error("\"station\" is not added to CSV to report mapping.");
 
         const statonIdIndex = mapping["station"].index;
@@ -31,16 +90,19 @@ async function mapCsvToReport(csvUrl, mapping){
         let stationAlias = dataInLine[statonIdIndex];
         if (stationAlias.startsWith('"') && stationAlias.endsWith('"')) stationAlias = stationAlias.slice(1, -1);
 
-        if (!Object.hasOwn(aliasMap, stationAlias)) throw new Error(stationAlias + " does not have a valid alias map.");
+        if (!Object.hasOwn(aliasMap, stationAlias)){
+            console.warn(stationAlias + " does not have a valid alias map.");
+            return;
+        }
+
         if (!Number.isInteger(aliasMap[stationAlias])) throw new Error(stationAlias + "'s alias map is not an integer.");
         const stationId = Number(aliasMap[stationAlias]);
 
-        if (!report["data"]) report["data"] = {};
-        if (!report["data"][stationId]) report["data"][stationId] = {};
+        if (!report["data"]["stationSpec"][stationId]) report["data"]["stationSpec"][stationId] = {};
 
         for (let name of Object.keys(mapping)){
 
-            if (name === "station") continue; //We have extracted the info already
+            if (name === "station") continue;
 
             if (isInvalidIndex(mapping[name].index, dataInLine.length)){
                 console.log(`CSV to report mapping is incorrect: ${mapping[name].index} is not a valid index. (${name}, ${dataInLine})`);
@@ -55,53 +117,64 @@ async function mapCsvToReport(csvUrl, mapping){
             if (data.endsWith("/")) data = data.slice(0, -1).trim();
 
             if (name === "time") {
-                if (report["hko-time"]) continue;
-                if (typeof data !== "string" || data.length !== 12) {
-                    console.log(data + " is not a valid HKO time.");
-                    continue;
-                }
-                report["hko-time"] = Utils.formatHkoTime(dataInLine[index]);
+                if (report["hkoTime"]) continue;
+                report["hkoTime"] = Utils.formatHkoTime(dataInLine[index]);
                 continue;
             }
 
-            switch (mapping[name].note){
-                case "*end":
-                    if (data.endsWith("*")) {
-                        data = data.slice(0, -1).trim();
-                    }
-                    break;
-                case "kmend":
-                    if (data.endsWith("km")) {
-                        data = data.replace("km", "").trim();
-                    }
-                    break;
-                case "zeroIfBlank":
-                    if (data.trim() === ""){
-                        data = 0;
-                    }
-                    break;
-                default:
-                    break;
+            data = checkNote(data, mapping[name].note);
+            data = checkType(data, type);
+            if (data == null){
+                console.log(`This line did not pass the type check: ${dataInLine} (${name}) (${stationId})`);
+                continue;
             }
-
-            switch (type){
-                case "number":
-                    if (data == null || data.toString().trim() === "" || !Number.isFinite(Number(data))){
-                        console.log(`${data} is not a number. (${name}) (${stationId}) (${dataInLine})`);
-                        continue;
-                    }
-                    report["data"][stationId][name] = Number(data);
-                    break;
-                default:
-                    if (data == null || data === "N/A"){
-                        console.log(`A data is null or N/A. (${name}) (${stationId}) (${dataInLine})`);
-                        continue;
-                    }
-                    report["data"][stationId][name] = data;
-                    break;
-            }
+            report["data"]["stationSpec"][stationId][name] = data;
         }
     });
+}
+
+function checkNote(data, note) {
+    let newData = data;
+    switch (note) {
+        case "*end":
+            if (newData.endsWith("*")) {
+                newData = newData.slice(0, -1).trim();
+            }
+            break;
+        case "kmend":
+            if (newData.endsWith("km")) {
+                newData = newData.replace("km", "").trim();
+            }
+            break;
+        case "zeroIfBlank":
+            if (newData.trim() === "") {
+                newData = 0;
+            }
+            break;
+        default:
+            break;
+    }
+    return newData;
+}
+
+function checkType(data, type) {
+    let newData = data;
+    switch (type) {
+        case "number":
+            if (newData == null || newData.toString().trim() === "" || !Number.isFinite(Number(newData))) {
+                console.log(`${newData} is not a number.`);
+                return null;
+            }
+            newData = Number(newData);
+            break;
+        default:
+            if (newData == null || newData === "N/A") {
+                console.log(`A data is null or N/A.`);
+                return null;
+            }
+            break;
+    }
+    return newData;
 }
 
 function isInvalidIndex(value, arrayLen){
