@@ -1,7 +1,7 @@
 {
     "name": "houjit",
     "main": "worker.js",
-    "compatibility_date": "2026-11-19",
+    "compatibility_date": "2026-11-21",
 
     "kv_namespaces": [
         {

@@ -75,13 +75,18 @@ async function mapCsvToReport(csvUrl, mapping){
                         data = data.replace("km", "").trim();
                     }
                     break;
+                case "zeroIfBlank":
+                    if (data.trim() === ""){
+                        data = 0;
+                    }
+                    break;
                 default:
                     break;
             }
 
             switch (type){
                 case "number":
-                    if (data == null || data.trim() === "" || !Number.isFinite(Number(data))){
+                    if (data == null || data.toString().trim() === "" || !Number.isFinite(Number(data))){
                         console.log(`${data} is not a number. (${name}) (${stationId}) (${dataInLine})`);
                         continue;
                     }

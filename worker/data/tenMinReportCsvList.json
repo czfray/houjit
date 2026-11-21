@@ -85,7 +85,8 @@
             },
             "windSpd": {
                 "index": 3,
-                "type": "number"
+                "type": "number",
+                "note": "zeroIfBlank"
             },
             "maxWindSpd": {
                 "index": 4,

@@ -28,7 +28,10 @@
 }
 
 body {
-    background-color: var(--black)
+    background-color: var(--black);
+    -webkit-user-select: none;
+    user-select: none;
+    overflow: hidden;
 }
 
 .topElementContainer{
@@ -48,21 +51,21 @@ body {
 }
 
 .topElement img {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
 }
 
 .topElement span{
     color: var(--dark-white);
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .centerText {
-    font-size: 64px;
+    font-size: 82px;
     color: white;
     font-weight: 650;
-    margin-top: 4px;
+    margin-top: 9px;
     margin-bottom: 0px;
 }
 
