@@ -18,6 +18,15 @@ humidViewer.textContent = tempData.data[station].humid + "%";
 const windViewer = document.getElementById("wind");
 windViewer.textContent = tempData.data[station].windSpd + " km/h";
 
+const tempViewer = document.getElementById("temp");
+tempViewer.textContent = tempData.data[station].temp + "°";
+
+const workerDelay = Math.floor((new Date() - new Date(tempData["worker-time"])) / 60000);
+const hkoDelay = Math.floor((new Date(tempData["worker-time"]) - new Date(tempData["hko-time"]))/60000);
+
+const lastUpdateViewer = document.getElementById("lastUpdate");
+lastUpdateViewer.textContent = `Last Updated ${workerDelay}+${hkoDelay} mins ago`;
+
 function formatHkTime(date){
     return new Intl.DateTimeFormat('en-GB', {
         timeZone: 'Asia/Hong_Kong',
