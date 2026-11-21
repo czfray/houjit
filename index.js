@@ -19,7 +19,13 @@ const windViewer = document.getElementById("wind");
 windViewer.textContent = tempData.data[station].windSpd + " km/h";
 
 const tempViewer = document.getElementById("temp");
-tempViewer.textContent = tempData.data[station].temp + "°";
+tempViewer.textContent = tempData.data[station].temp.toFixed(1) + "°";
+
+const minTempViewer = document.getElementById("minTemp");
+minTempViewer.textContent = tempData.data[station].minTemp.toFixed(1) + "°";
+
+const maxTempViewer = document.getElementById("maxTemp");
+maxTempViewer.textContent = tempData.data[station].maxTemp.toFixed(1) + "°";
 
 const workerDelay = Math.floor((new Date() - new Date(tempData["worker-time"])) / 60000);
 const hkoDelay = Math.floor((new Date(tempData["worker-time"]) - new Date(tempData["hko-time"]))/60000);

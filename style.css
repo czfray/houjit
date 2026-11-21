@@ -34,7 +34,7 @@ body {
     overflow: hidden;
 }
 
-.topElementContainer{
+.smallInfoContainer{
     display: flex;
     align-items: center;
     gap: 16px;
@@ -42,7 +42,14 @@ body {
     flex-wrap: nowrap;
 }
 
-.topElement {
+.smallInfoContainerVert{
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    line-height: 2px;
+}
+
+.smallInfo {
     display: flex;
     align-items: center;
     gap: 2px;
@@ -50,13 +57,13 @@ body {
     white-space: nowrap;
 }
 
-.topElement img {
+.smallInfo img {
     width: 22px;
     height: 22px;
     flex-shrink: 0;
 }
 
-.topElement span{
+.smallInfo span{
     color: var(--dark-white);
     font-size: 18px;
 }
@@ -66,7 +73,36 @@ body {
     color: white;
     font-weight: 650;
     margin-top: 9px;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
+}
+
+.mediumInfo {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.mediumInfo img {
+    width: 48px;
+    height: 48px;
+    margin-right: -8px;
+    flex-shrink: 0;
+}
+
+.mediumInfo span{
+    color: var(--white);
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.tempInfoContainer{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: nowrap;
 }
 
 .bottomText{
