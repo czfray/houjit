@@ -36,6 +36,7 @@ body {
     align-items: center;
     gap: 16px;
     justify-self: center;
+    flex-wrap: nowrap;
 }
 
 .topElement {
@@ -43,9 +44,16 @@ body {
     align-items: center;
     gap: 0px;
     justify-self: center;
+    white-space: nowrap;
 }
 
-.topElementText{
+.topElement img {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.topElement span{
     color: var(--dark-white);
     font-size: 24px;
 }
