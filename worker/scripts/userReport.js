@@ -15,6 +15,7 @@ function initialiseReport(_stationMap){
     let report = {};
     stationMap = _stationMap;
     report["data"] = {};
+    report["origin"] = {};
     return report;
 }
 
@@ -33,6 +34,8 @@ async function mapAllStnSpecDataToReport(report, lat, lon, tenMinReport){
 }
 
 async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
+    if (!Object.keys(tenMinReport["items"]).includes(name)) return;
+
     let minDist;
     let minDistStn;
 
@@ -54,7 +57,19 @@ async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
     }
 
     report["data"][name] = tenMinReport["data"]["stationSpec"][name][minDistStn];
-    console.log(`${name} uses data from station ${minDistStn} (${(minDist/1000).toFixed(3)}km)`);
+    
+    report["origin"][name] = {
+        "stationId": minDistStn,
+        "stationData": stationMap["stations"][minDistStn],
+        "child": tenMinReport["items"][name]
+    };
+
+    console.log(`${name} uses data from station ${minDistStn} (${(minDist/1000).toFixed(3)}km).`);
+
+    for (const childName of tenMinReport["items"][name]){
+        report["data"][childName] = tenMinReport["data"]["stationSpec"][childName][minDistStn];
+        console.log(` - Child ${childName} also uses data from station ${minDistStn}.`);
+    }
 }
 
 //station id and name and distance return!

@@ -10,15 +10,8 @@ export async function fetchTenMinReport(_aliasMap){
         
         mapGlobalCsvToReport(report,
             "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_15min_uvindex.csv",
-            "uv", "number", "zeroIfBlank", 1
+            "uv", "number", "zeroIfBlank", 1, null
         ),
-
-        /*
-        mapPosSpecCsvToReport(report,
-            "https://data.weather.gov.hk/weatherAPI/hko_data/F3/Gridded_rainfall_nowcast.csv",
-            "rain", "number", "", 2, 3, 4
-        )
-        */
     ]);
     return report;
 }
@@ -26,6 +19,7 @@ export async function fetchTenMinReport(_aliasMap){
 function initialiseReport(_aliasMap){
     let report = {};
     aliasMap = _aliasMap;
+    report["items"] = {};
     report["data"] = {};
     report["data"]["global"] = {};
     report["data"]["stationSpec"] = {};
@@ -33,12 +27,14 @@ function initialiseReport(_aliasMap){
     return report;
 }
 
-async function mapGlobalCsvToReport(report, csvUrl, name, type, note, dataIndex){
+async function mapGlobalCsvToReport(report, csvUrl, name, type, note, dataIndex, parent){
     await Utils.processHkoCsv(csvUrl, (dataInLine) => {
         if (isInvalidIndex(dataIndex, dataInLine.length)){
             console.log(`Data index is invalid. (data:${dataIndex}) ${dataInLine} (${name})`);
             return;
         }
+
+        setParent(report, name, parent);
 
         let data = dataInLine[dataIndex];
         data = checkNote(data, note);
@@ -50,28 +46,6 @@ async function mapGlobalCsvToReport(report, csvUrl, name, type, note, dataIndex)
         }
         report["data"]["global"][name] = data;
         return;
-    });
-}
-
-async function mapPosSpecCsvToReport(report, csvUrl, name, type, note, latIndex, lonIndex, dataIndex){
-    report["data"]["posSpec"][name] = {};
-    await Utils.processHkoCsv(csvUrl, (dataInLine) => {
-        if (isInvalidIndex(latIndex, dataInLine.length) || isInvalidIndex(lonIndex, dataInLine.length) || isInvalidIndex(dataIndex, dataInLine.length)){
-            console.log(`Index/Indices is invalid. (lat:${latIndex}, lon:${lonIndex}, data:${dataIndex}) ${dataInLine} (${name})`);
-            return;
-        }
-
-        const lat = dataInLine[latIndex];
-        const lon = dataInLine[lonIndex];
-        let data = dataInLine[dataIndex];
-        data = checkNote(data, note);
-        data = checkType(data, type);
-        if (data == null) {
-            console.log(`This line did not pass the type check: ${dataInLine} (${name})`);
-            return;
-        }
-
-        report["data"]["posSpec"][name][`${lat},${lon}`] = data;
     });
 }
 
@@ -108,6 +82,8 @@ async function mapStnSpecCsvToReport(report, csvUrl, mapping){
                 console.log(`CSV to report mapping is incorrect: ${mapping[name].index} is not a valid index. (${name}, ${dataInLine})`);
                 continue;
             }
+
+            setParent(report, name, mapping[name].parent);
 
             const index = Number(mapping[name].index);
             const type = mapping[name].type;
@@ -177,6 +153,15 @@ function checkType(data, type) {
             break;
     }
     return newData;
+}
+
+function setParent(report, name, parent) {
+    if (parent != null) {
+        if (!Object.hasOwn(report["items"], parent)) report["items"][parent] = [];
+        if (!report["items"][parent].includes(name)) report["items"][parent].push(name);
+    } else {
+        if (!Object.hasOwn(report["items"], name)) report["items"][name] = [];
+    }
 }
 
 function isInvalidIndex(value, arrayLen){

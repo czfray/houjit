@@ -27,12 +27,14 @@
             "maxTemp": {
                 "index": 2,
                 "type": "number",
-                "note": "*end"
+                "note": "*end",
+                "parent": "temp"
             },
             "minTemp": {
                 "index": 3,
                 "type": "number",
-                "note": "*end"
+                "note": "*end",
+                "parent": "temp"
             }
         }
     },
@@ -81,7 +83,8 @@
             },
             "windDir": {
                 "index": 2,
-                "type": "string"
+                "type": "string",
+                "parent": "windSpd"
             },
             "windSpd": {
                 "index": 3,
@@ -90,7 +93,8 @@
             },
             "maxWindSpd": {
                 "index": 4,
-                "type": "number"
+                "type": "number",
+                "parent": "windSpd"
             }
         }
     }
