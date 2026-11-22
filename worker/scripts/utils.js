@@ -19,7 +19,7 @@ export async function processHkoCsv(csvUrl, perLineProcess){
         return;
     }
 
-    onsole.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
+    console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
 
     benchmarkStart = performance.now();
     const rawData = await response.text();
