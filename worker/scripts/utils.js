@@ -47,3 +47,19 @@ export function formatHkTime(date){
         hour12: false
     }).format(new Date(date));
 }
+
+export function getGpsDistance(lat1, lon1, lat2, lon2){
+    lat1 =  (lat1 * Math.PI) / 180;
+    lat2 =  (lat2 * Math.PI) / 180;
+    lon1 =  (lon1 * Math.PI) / 180;
+    lon2 =  (lon2 * Math.PI) / 180;
+
+    const deltaLat = lat2 - lat1;
+    const deltaLon = lon2 - lon1;
+    
+    const a = (Math.sin(deltaLat / 2) ** 2) + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(deltaLon/ 2) ** 2);
+    const R = 6371008.77141506;
+    const d = 2 * R * Math.asin(Math.sqrt(a));
+
+    return d;
+}

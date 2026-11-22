@@ -98,8 +98,6 @@ async function mapStnSpecCsvToReport(csvUrl, mapping){
         if (!Number.isInteger(aliasMap[stationAlias])) throw new Error(stationAlias + "'s alias map is not an integer.");
         const stationId = Number(aliasMap[stationAlias]);
 
-        if (!report["data"]["stationSpec"][stationId]) report["data"]["stationSpec"][stationId] = {};
-
         for (let name of Object.keys(mapping)){
 
             if (name === "station") continue;
@@ -128,7 +126,9 @@ async function mapStnSpecCsvToReport(csvUrl, mapping){
                 console.log(`This line did not pass the type check: ${dataInLine} (${name}) (${stationId})`);
                 continue;
             }
-            report["data"]["stationSpec"][stationId][name] = data;
+
+            if (!report["data"]["stationSpec"][name]) report["data"]["stationSpec"][name] = {};
+            report["data"]["stationSpec"][name][stationId] = data;
         }
     });
 }

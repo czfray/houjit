@@ -2,6 +2,7 @@
 //curl -s http://localhost:8787/__scheduled OR Invoke-WebRequest -Uri "http://localhost:8787/__scheduled" 
 
 import * as TenMinReport from "./scripts/tenMinReport.js";
+import * as UserReport from "./scripts/userReport.js";
 import * as Utils from "./scripts/utils.js";
 
 import stationsData from "./data/stations.json";
@@ -17,18 +18,12 @@ export default {
 
     async fetch(request, env) {
         const url = new URL(request.url);
-        const target = url.searchParams.get("target");
+        const lon = Number(url.searchParams.get("lon"));
+        const lat = Number(url.searchParams.get("lat"));
 
-        switch (target) {
-            case "report":
-                const report = await getStorage(env, "tenMinReport");
-                return getCORSResponse(report);
-            default:
-                return Response.json(
-                    { error: "Target parameter missing/invalid" },
-                    { status: 400 }
-                );
-        }
+        const tenMinReport = await getStorage(env, "tenMinReport");
+        const userReport = await UserReport.fetchUserReport(lat, lon, tenMinReport, stationsData);
+        return getCORSResponse(userReport);
     }
 };
 
