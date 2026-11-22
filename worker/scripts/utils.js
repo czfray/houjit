@@ -2,17 +2,18 @@ export async function processHkoCsv(csvUrl, perLineProcess){
     const url = new URL(csvUrl);
     url.searchParams.set("t", Date.now());
     
+    let benchmarkStart = performance.now();
     const response = await fetch(url);
-    console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}`);
+    console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
     
     if (!response.ok) {
         throw new Error(`HKO API error when fetching CSV: ${response.status}`);
     }
 
-    console.time(`CSV ${csvUrl}`);
+    benchmarkStart = performance.now();
     const rawData = await response.text();
-    console.timeEnd(`CSV ${csvUrl}`);
-    
+    console.log(`CSV BODY ${csvUrl}: ${performance.now() - benchmarkStart} ms`);
+
     for (const rawDataInLine of rawData.trim().split("\n").slice(1)) {
         const dataInLine = rawDataInLine.split(",");
         perLineProcess(dataInLine);

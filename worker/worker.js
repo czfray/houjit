@@ -28,9 +28,9 @@ export default {
 };
 
 async function putStorage(env, name, data) {
-    console.time("KV PUT");
+    const benchmarkStart = performance.now();
     await env.HOUJIT_KV.put(name, JSON.stringify(data));
-    console.timeEnd("KV PUT");
+    console.log(`KV Put time: ${performance.now() - benchmarkStart} ms`)
 }
 
 async function getStorage(env, name){
