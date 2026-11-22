@@ -39,7 +39,7 @@ async function update() {
     windViewer.textContent = report.data["windSpd"] + " km/h";
     tempViewer.textContent = Number(report.data["temp"]).toFixed(1) + "°";
     minTempViewer.textContent = Number(report.data["minTemp"]).toFixed(1) + "°";
-    maxTempViewer.textContent = Number(report.data["maxTemp"].toFixed(1)) + "°";
+    maxTempViewer.textContent = Number(report.data["maxTemp"]).toFixed(1) + "°";
     aprntTempViewer.textContent = Utils.getApparentTemp(report.data["temp"], report.data["humid"], report.data["windSpd"]).toFixed(1) + "°";
     
     hkoUpdateTime = new Date(report["hkoTime"]);
