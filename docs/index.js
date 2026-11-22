@@ -15,9 +15,10 @@ const aprntTempViewer = document.getElementById("aprntTemp");
 const lastUpdateViewer = document.getElementById("lastUpdate");
 
 let coords;
+
 update();
 setInterval(update, 2.5 * 60 * 1000);
-
+setInterval(updateTimestamps, 1000);
 
 async function update() {
     coords = await GPS.getGpsLocation();
@@ -38,8 +39,11 @@ async function update() {
     minTempViewer.textContent = Number(report.data["minTemp"]).toFixed(1) + "°";
     maxTempViewer.textContent = Number(report.data["maxTemp"].toFixed(1)) + "°";
     aprntTempViewer.textContent = Utils.getApparentTemp(report.data["temp"], report.data["humid"], report.data["windSpd"]).toFixed(1) + "°";
+    updateTimestamps();
+}
+
+function updateTimestamps(){
     const workerDelay = Math.floor((new Date() - new Date(report["workerTime"])) / 60000);
     const hkoDelay = Math.floor((new Date(report["workerTime"]) - new Date(report["hkoTime"])) / 60000);
     lastUpdateViewer.textContent = `Last Updated ${workerDelay}+${hkoDelay} mins ago`;
-
 }
