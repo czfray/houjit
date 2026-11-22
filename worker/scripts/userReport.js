@@ -72,6 +72,3 @@ async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
         console.log(` - Child ${childName} also uses data from station ${minDistStn}.`);
     }
 }
-
-//TODO geolocation on app
-//TODO request lat an lon validation

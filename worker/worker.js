@@ -21,6 +21,14 @@ export default {
         const lon = Number(url.searchParams.get("lon"));
         const lat = Number(url.searchParams.get("lat"));
 
+        if (!url.searchParams.has("lat") || !url.searchParams.has("lon") || !Number.isFinite(lon) || !Number.isFinite(lat)) {
+            console.log(`${url.search} did not provide a valid coordinate.`)
+            return Response.json(
+                { error: `Search params ('${url.search}') did not provide a valid coordinate with lat and lon.` },
+                { status: 400 }
+            );
+        }
+
         const tenMinReport = await getStorage(env, "tenMinReport");
         const userReport = await UserReport.fetchUserReport(lat, lon, tenMinReport, stationsData);
         return getCORSResponse(userReport);
