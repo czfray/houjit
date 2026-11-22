@@ -3,15 +3,23 @@ export async function processHkoCsv(csvUrl, perLineProcess){
     url.searchParams.set("t", Date.now());
     
     let benchmarkStart = performance.now();
-    const response = await fetch(url, {
-        signal: AbortSignal.timeout(30000)
-    });
-    console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
-    
+
+    let response;
+    try {
+        response = await fetch(url, {
+            signal: AbortSignal.timeout(30000)
+        });
+    } catch (error) {
+        console.log(`Fetching HKO API CSV caused a timeout.`);
+        return;
+    }
+
     if (!response.ok) {
         console.log(`HKO API error when fetching CSV: ${response.status}`);
         return;
     }
+
+    onsole.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
 
     benchmarkStart = performance.now();
     const rawData = await response.text();
