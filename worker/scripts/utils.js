@@ -9,7 +9,8 @@ export async function processHkoCsv(csvUrl, perLineProcess){
     console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
     
     if (!response.ok) {
-        throw new Error(`HKO API error when fetching CSV: ${response.status}`);
+        console.log(`HKO API error when fetching CSV: ${response.status}`);
+        return;
     }
 
     benchmarkStart = performance.now();
