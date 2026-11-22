@@ -21,13 +21,13 @@ const windViewer = document.getElementById("wind");
 windViewer.textContent = tempData.data["stationSpec"][station].windSpd + " km/h";
 
 const tempViewer = document.getElementById("temp");
-tempViewer.textContent = tempData.data["stationSpec"][station].temp.toFixed(1) + "°";
+tempViewer.textContent = Number(tempData.data["stationSpec"][station].temp).toFixed(1) + "°";
 
 const minTempViewer = document.getElementById("minTemp");
-minTempViewer.textContent = tempData.data["stationSpec"][station].minTemp.toFixed(1) + "°";
+minTempViewer.textContent = Number(tempData.data["stationSpec"][station].minTemp).toFixed(1) + "°";
 
 const maxTempViewer = document.getElementById("maxTemp");
-maxTempViewer.textContent = tempData.data["stationSpec"][station].maxTemp.toFixed(1) + "°";
+maxTempViewer.textContent = Number(tempData.data["stationSpec"][station].maxTemp.toFixed(1)) + "°";
 
 const aprntTempViewer = document.getElementById("aprntTemp");
 aprntTempViewer.textContent = Utils.getApparentTemp(tempData.data["stationSpec"][station].temp, tempData.data["stationSpec"][station].humid, tempData.data["stationSpec"][station].windSpd).toFixed(1) + "°";
