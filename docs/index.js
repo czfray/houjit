@@ -15,13 +15,15 @@ const aprntTempViewer = document.getElementById("aprntTemp");
 const lastUpdateViewer = document.getElementById("lastUpdate");
 
 let coords;
+let workerUpdateTime;
+let hkoUpdateTime;
 
 update();
 setInterval(update, 2.5 * 60 * 1000);
 setInterval(updateTimestamps, 1000);
 
 async function update() {
-    coords = await GPS.getGpsLocation();
+    coords = !devMode? await GPS.getGpsLocation() : null;
     console.log("Location obtained: " + coords);
     if (coords == null) {
         coords = [22.30194444, 114.17416667];
@@ -39,11 +41,14 @@ async function update() {
     minTempViewer.textContent = Number(report.data["minTemp"]).toFixed(1) + "°";
     maxTempViewer.textContent = Number(report.data["maxTemp"].toFixed(1)) + "°";
     aprntTempViewer.textContent = Utils.getApparentTemp(report.data["temp"], report.data["humid"], report.data["windSpd"]).toFixed(1) + "°";
+    
+    hkoUpdateTime = new Date(report["hkoTime"]);
+    workerUpdateTime = new Date(report["workerTime"]);
     updateTimestamps();
 }
 
 function updateTimestamps(){
-    const workerDelay = Math.floor((new Date() - new Date(report["workerTime"])) / 60000);
-    const hkoDelay = Math.floor((new Date(report["workerTime"]) - new Date(report["hkoTime"])) / 60000);
+    const workerDelay = Math.floor((new Date() - workerUpdateTime) / 60000);
+    const hkoDelay = Math.floor((workerUpdateTime - hkoUpdateTime) / 60000);
     lastUpdateViewer.textContent = `Last Updated ${workerDelay}+${hkoDelay} mins ago`;
 }
