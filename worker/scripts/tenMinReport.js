@@ -1,20 +1,19 @@
 import * as Utils from "./utils.js"
 import csvLoadDatas from "../data/tenMinReportCsvList.json";
 
-let report;
 let aliasMap;
 
 export async function fetchTenMinReport(_aliasMap){
-    initialiseReport(_aliasMap);
+    let report = initialiseReport(_aliasMap);
     await Promise.all([
-        fetchStnSpecCsvsFromJson(),
+        fetchStnSpecCsvsFromJson(report),
         
-        mapGlobalCsvToReport(
+        mapGlobalCsvToReport(report,
             "https://data.weather.gov.hk/weatherAPI/hko_data/regional-weather/latest_15min_uvindex.csv",
             "uv", "number", "zeroIfBlank", 1
         ),
 
-        mapPosSpecCsvToReport(
+        mapPosSpecCsvToReport(report,
             "https://data.weather.gov.hk/weatherAPI/hko_data/F3/Gridded_rainfall_nowcast.csv",
             "rain", "number", "", 2, 3, 4
         )
@@ -23,15 +22,16 @@ export async function fetchTenMinReport(_aliasMap){
 }
 
 function initialiseReport(_aliasMap){
-    report = {};
+    let report = {};
     aliasMap = _aliasMap;
     report["data"] = {};
     report["data"]["global"] = {};
     report["data"]["stationSpec"] = {};
     report["data"]["posSpec"] = {};
+    return report;
 }
 
-async function mapGlobalCsvToReport(csvUrl, name, type, note, dataIndex){
+async function mapGlobalCsvToReport(report, csvUrl, name, type, note, dataIndex){
     await Utils.processHkoCsv(csvUrl, (dataInLine) => {
         if (isInvalidIndex(dataIndex, dataInLine.length)){
             console.log(`Data index is invalid. (data:${dataIndex}) ${dataInLine} (${name})`);
@@ -51,7 +51,7 @@ async function mapGlobalCsvToReport(csvUrl, name, type, note, dataIndex){
     });
 }
 
-async function mapPosSpecCsvToReport(csvUrl, name, type, note, latIndex, lonIndex, dataIndex){
+async function mapPosSpecCsvToReport(report, csvUrl, name, type, note, latIndex, lonIndex, dataIndex){
     report["data"]["posSpec"][name] = {};
     await Utils.processHkoCsv(csvUrl, (dataInLine) => {
         if (isInvalidIndex(latIndex, dataInLine.length) || isInvalidIndex(lonIndex, dataInLine.length) || isInvalidIndex(dataIndex, dataInLine.length)){
@@ -73,13 +73,13 @@ async function mapPosSpecCsvToReport(csvUrl, name, type, note, latIndex, lonInde
     });
 }
 
-async function fetchStnSpecCsvsFromJson(){
+async function fetchStnSpecCsvsFromJson(report){
     await Promise.all(
-        csvLoadDatas.map(data => mapStnSpecCsvToReport(data.url, data.map))
+        csvLoadDatas.map(data => mapStnSpecCsvToReport(report, data.url, data.map))
     );
 }
 
-async function mapStnSpecCsvToReport(csvUrl, mapping){
+async function mapStnSpecCsvToReport(report, csvUrl, mapping){
     await Utils.processHkoCsv(csvUrl, (dataInLine) => {
 
         if (!("station" in mapping)) throw new Error("\"station\" is not added to CSV to report mapping.");

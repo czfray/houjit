@@ -3,7 +3,9 @@ export async function processHkoCsv(csvUrl, perLineProcess){
     url.searchParams.set("t", Date.now());
     
     let benchmarkStart = performance.now();
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        signal: AbortSignal.timeout(30000)
+    });
     console.log(`[${"Date:", response.headers.get("Date")}] Fetched URL ${csvUrl}, Cache: ${response.headers.get("CF-Cache-Status")}, Age: ${response.headers.get("Age")}, Time: ${performance.now() - benchmarkStart} ms`);
     
     if (!response.ok) {

@@ -1,24 +1,24 @@
 import * as Utils from "./utils.js";
 
-let report;
 let stationMap;
 
 export async function fetchUserReport(lat, lon, tenMinReport, _stationMap){
-    initialiseReport(_stationMap);
+    let report = initialiseReport(_stationMap);
     await Promise.all([
-        mapAllGlobalDataToReport(tenMinReport),
-        mapAllStnSpecDataToReport(lat, lon, tenMinReport)
+        mapAllGlobalDataToReport(report, tenMinReport),
+        mapAllStnSpecDataToReport(report, lat, lon, tenMinReport)
     ]);
     return report;
 }
 
 function initialiseReport(_stationMap){
-    report = {};
+    let report = {};
     stationMap = _stationMap;
     report["data"] = {};
+    return report;
 }
 
-async function mapAllGlobalDataToReport(tenMinReport){
+async function mapAllGlobalDataToReport(report, tenMinReport){
     report["hkoTime"] = tenMinReport["hkoTime"];
     report["workerTime"] = tenMinReport["workerTime"];
     for(const dataName of Object.keys(tenMinReport["data"]["global"])){
@@ -26,13 +26,13 @@ async function mapAllGlobalDataToReport(tenMinReport){
     }
 }
 
-async function mapAllStnSpecDataToReport(lat, lon, tenMinReport){
+async function mapAllStnSpecDataToReport(report, lat, lon, tenMinReport){
     await Promise.all(
-        Object.keys(tenMinReport["data"]["stationSpec"]).map(name => mapStnSpecDataToReport(lat, lon, name, tenMinReport))
+        Object.keys(tenMinReport["data"]["stationSpec"]).map(name => mapStnSpecDataToReport(report, lat, lon, name, tenMinReport))
     );
 }
 
-async function mapStnSpecDataToReport(lat, lon, name, tenMinReport){
+async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
     let minDist;
     let minDistStn;
 
