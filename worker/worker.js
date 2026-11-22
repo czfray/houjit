@@ -28,7 +28,9 @@ export default {
 };
 
 async function putStorage(env, name, data) {
+    console.time("KV PUT");
     await env.HOUJIT_KV.put(name, JSON.stringify(data));
+    console.timeEnd("KV PUT");
 }
 
 async function getStorage(env, name){

@@ -9,7 +9,10 @@ export async function processHkoCsv(csvUrl, perLineProcess){
         throw new Error(`HKO API error when fetching CSV: ${response.status}`);
     }
 
+    console.time(`CSV ${csvUrl}`);
     const rawData = await response.text();
+    console.timeEnd(`CSV ${csvUrl}`);
+    
     for (const rawDataInLine of rawData.trim().split("\n").slice(1)) {
         const dataInLine = rawDataInLine.split(",");
         perLineProcess(dataInLine);
