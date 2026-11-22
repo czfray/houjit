@@ -57,7 +57,7 @@ async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
     console.log(`${name} uses data from station ${minDistStn} (${(minDist/1000).toFixed(3)}km)`);
 }
 
-//TODO POS SPEC DATA (RAIN) and station id and name and distance return!
+//station id and name and distance return!
 //TODO allow grouping of diff name
 //TODO geolocation on app
 //TODO request lat an lon validation

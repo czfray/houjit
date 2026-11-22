@@ -13,10 +13,12 @@ export async function fetchTenMinReport(_aliasMap){
             "uv", "number", "zeroIfBlank", 1
         ),
 
+        /*
         mapPosSpecCsvToReport(report,
             "https://data.weather.gov.hk/weatherAPI/hko_data/F3/Gridded_rainfall_nowcast.csv",
             "rain", "number", "", 2, 3, 4
         )
+        */
     ]);
     return report;
 }
