@@ -61,6 +61,7 @@ async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
     report["origin"][name] = {
         "stationId": minDistStn,
         "stationData": stationMap["stations"][minDistStn],
+        "distance": minDist,
         "child": tenMinReport["items"][name]
     };
 
@@ -72,7 +73,5 @@ async function mapStnSpecDataToReport(report, lat, lon, name, tenMinReport){
     }
 }
 
-//station id and name and distance return!
-//TODO allow grouping of diff name
 //TODO geolocation on app
 //TODO request lat an lon validation
